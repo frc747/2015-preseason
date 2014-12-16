@@ -29,13 +29,34 @@ public class Input implements IInput {
         logger = Logging.getInstance();
     }
     public double getJoystick(boolean rightStick, boolean yAxis) {
-        /**(true true) would be yAxis movement on the righStick
-         * (true false) would be xAxis movement on rightStick
-         * (false z) would be z movement on the leftStick, etc.
-         * the double is the the joystick movement from -1 to 1
+        {if ((rightStick = true) && (yAxis = true))
+            {//move double on y axis on rightstick
+            };
+        else if ((rightStick = true) && (yAxis = false)
+            {// move double on x axis on rightstick
+            };
+        else if ((rightstick = false) && (yAxis = true))
+            {// move double on y axis on leftstick
+            };
+        else
+            {//move double on x axis on leftstick
+            };
+        }    
+        {if (getJoystick == 0)
+            {//no movement
+            }
+        else if (getJoystick > 0)
+            {//move foward at (z/1 speed)
+            }
+        else if (getJoystick < 0)
+            {//move backward at (z/-1 speed)
+            }
+        /** the double is the the joystick movement from -1 to 1
          * if double is 0,no movement; >0 is foward, <0 is backward
+         * I read somewhere that on controllers, positive values for the y axis are actually backward
+         * (pulling it towards the user) and vice versa. Is this true?
          */
-        
+        }
         logger.log(Logging.wtf, TAG, "Not supported yet.");
         return 0;
     }
