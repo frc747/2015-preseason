@@ -55,5 +55,26 @@ public class Encoders implements IEncoders {
         logger.log(Logging.wtf, TAG, "Not supported yet.");
     }
     
+
+//My code starts here; Im sure there will be many mistakes, please let me know what and where they are and I will correct the immediately, sorry for the inconvenience.
+    
+    public boolean Direction(forwards);
+    public int WheelCirc =??? //The circumference of the wheel will be need to find direction
+    public int RotationNum =??? ///Im not entirely sure of how to retrieve this information from the encoders
+    public int Distance = WheelCirc * RotationNum;
+    public int Time = //I am not sure how to code any type of time keeping device in java.  If i was more familiar with the syntax, It would count the seconds from when directional input began and when it ends
+    public int Speed = Distance/Time;
+    
+        if (Direction = forwards){
+            system.out.print(Distance);
+            system.out.print("forwards at");
+            system.out.print(Speed);
+            system.out.print("feet/second");
+        }
+}       else {
+            system.out.print(Distance);
+            system.out.print("backwards at");
+            system.out.print(Speed);
+            system.out.print("feet/second");
 }
-//test
+}
