@@ -39,6 +39,10 @@ public class Spikes implements ISpike {
     }
 
     public int getDirection(boolean rightSpike) {
+        if (rightSpike = true)
+            {direction = 2}
+        else
+            {direction = 1} //are these ints supposed to correlate to the Relay number above?
         throw new RuntimeException("Not supported yet.");
     }
 
