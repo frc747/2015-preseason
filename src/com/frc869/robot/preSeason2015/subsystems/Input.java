@@ -46,10 +46,10 @@ public class Input implements IInput {
             {//no movement
             }
         else if (getJoystick > 0)
-            {//move foward at (z/1 speed)
+            {//move at (z/1 speed): foward
             }
         else if (getJoystick < 0)
-            {//move backward at (z/-1 speed)
+            {//move at (z/1 speed): backward
             }
         /** the double is the the joystick movement from -1 to 1
          *  I need to find out how to convert the comments above and below into syntax
@@ -94,16 +94,22 @@ public class Input implements IInput {
                 {//preform function of startButton
                 };   
             else if (buttonNum = 10)
-                {//preform function of upButton
+                {if (speed = 0)
+                    {speed = speed + 10};
+                else    
+                    {speed = speed + speed/10}; // upButton
                 };   
             else if (buttonNum = 11)
-                {//preform function of downButton 
+                {if (speed = 0)
+                    {speed = speed - 10};
+                 else 
+                    {speed = speed - speed/10}; // downButton
                 };    
             else if (buttonNum = 12)
-                {//preform function of leftButton
+                {speed = 0 //leftButton: reset
                 };
             else if (buttonNum = 13)
-                {//preform function of rightButton
+                {speed = 0 //rightButton: reset
                 };    
             else if (buttonNum = 14)
                 {//preform function of leftJoyButton
