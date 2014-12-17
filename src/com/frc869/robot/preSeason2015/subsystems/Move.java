@@ -36,15 +36,33 @@ public class Move implements IMove {
         logger = Logging.getInstance();
     }
     public void setSpeed(boolean clockwise, boolean rightSpeedController, double speed) {
+        
         logger.log(Logging.wtf, TAG, "Not supported yet.");
     }
 
     public double getSpeed(boolean rightSpeedController) {
+        // getSpeed from joystick (the double)  from Input.java
+        if (rightSpeedController = true)
+            {//right talon
+            }
         logger.log(Logging.wtf, TAG, "Not supported yet.");
         return 0;
     }
 
     public boolean getDirection(boolean rightSpeedController) {
+        // getDirection from Input.java (foward=positve, backward=negative)
+        if (getJoystick > 0)
+            {getDirection = true);
+        else if (getJoystick < 0)
+            {getDirection = false};
+        else
+            {null};
+        if getDirection = true
+            {//foward
+            }
+        else 
+            {//backward
+            }
         logger.log(Logging.wtf, TAG, "Not supported yet.");
         return false;
     }
