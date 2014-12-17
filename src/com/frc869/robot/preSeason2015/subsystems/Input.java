@@ -27,32 +27,26 @@ public class Input implements IInput {
     private Input() {
         gamepad = new Joystick(1);
         logger = Logging.getInstance();
+    public double speed;    
     }
     public double getJoystick(boolean rightStick, boolean yAxis) {
         {if ((rightStick = true) && (yAxis = true))
-            {//move double on y axis on rightstick
-            };
+            {getJoystick = rightStick.getY() };
         else if ((rightStick = true) && (yAxis = false)
-            {// move double on x axis on rightstick
-            };
+            {getJoystick = rightStick.getX() };
         else if ((rightstick = false) && (yAxis = true))
-            {// move double on y axis on leftstick
-            };
+            {getJoystick = leftStick.getY() };
         else
-            {//move double on x axis on leftstick
-            };
+            {getJoystick = leftStick.getX() };
         }    
         {if (getJoystick == 0)
-            {//no movement
-            }
+            {speed = 0};
         else if (getJoystick > 0)
-            {//move at (z/1 speed): foward
-            }
+            {speed = getJoystick * 100}; //foward
         else if (getJoystick < 0)
-            {//move at (z/1 speed): backward
-            }
+            {speed = getJoystick * 100}; //backward
         /** the double is the the joystick movement from -1 to 1
-         *  I need to find out how to convert the comments above and below into syntax
+         *  I need to find out how to convert the comments below into syntax
          */
         }
         logger.log(Logging.wtf, TAG, "Not supported yet.");
@@ -60,6 +54,7 @@ public class Input implements IInput {
     }
 
     public boolean getButton(int buttonNum) {
+        speed = getSpeed //from Move.java
         Scanner scan = new Scanner (System.in);
         int buttonNum = scan.nextInt();
         if getButton (true)
