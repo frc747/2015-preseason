@@ -52,9 +52,7 @@ public class Input implements IInput {
             {//move backward at (z/-1 speed)
             }
         /** the double is the the joystick movement from -1 to 1
-         * if double is 0,no movement; >0 is foward, <0 is backward
-         * I read somewhere that on controllers, positive values for the y axis are actually backward
-         * (pulling it towards the user) and vice versa. Is this true?
+         *  I need to find out how to convert the comments above and below into syntax
          */
         }
         logger.log(Logging.wtf, TAG, "Not supported yet.");
@@ -62,7 +60,9 @@ public class Input implements IInput {
     }
 
     public boolean getButton(int buttonNum) {
-        if (true)
+        Scanner scan = new Scanner (System.in);
+        int buttonNum = scan.nextInt();
+        if getButton (true)
             {if (buttonNum = 0)
                 {//preform function of aButton
                 };
@@ -70,11 +70,51 @@ public class Input implements IInput {
                 {//preform function of bButton
                 };
             else if (buttonNum = 2)
-                {//etc.
+                {//preform function of yButton
                 };
+            else if (buttonNum = 3)
+                {//preform function of xButton
+                };
+            else if (buttonNum = 4)
+                {//preform function of rtButton
+                };
+            else if (buttonNum = 5)
+                {//preform function of rbButton
+                };
+            else if (buttonNum = 6)
+                {//preform function of ltButton
+                };
+            else if (buttonNum = 7)
+                {//preform function of lbButton
+                };   
+            else if (buttonNum = 8)
+                {//preform function of backButton
+                };  
+            else if (buttonNum = 9)
+                {//preform function of startButton
+                };   
+            else if (buttonNum = 10)
+                {//preform function of upButton
+                };   
+            else if (buttonNum = 11)
+                {//preform function of downButton 
+                };    
+            else if (buttonNum = 12)
+                {//preform function of leftButton
+                };
+            else if (buttonNum = 13)
+                {//preform function of rightButton
+                };    
+            else if (buttonNum = 14)
+                {//preform function of leftJoyButton
+                };    
+            else if (buttonNum = 15)
+                {//preform function of rightJoyButton
+                };        
+                }
             }
         else
-            {//keep checking
+            {// keep scanning
             }
     
         logger.log(Logging.wtf, TAG, "Not supported yet.");
