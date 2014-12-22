@@ -24,36 +24,36 @@ public class Logging implements ILogging {
     private Logging() {
         
     }
-    public void log(int level, String tag, String text) {
-        
+    public void log(int level, String tag, String val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, int num) {
-        
+    public void log(int level, String tag, int val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, double num) {
-        
+    public void log(int level, String tag, double val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, float num) {
-        
+    public void log(int level, String tag, float val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, short num) {
-        
+    public void log(int level, String tag, short val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, boolean num) {
-        
+    public void log(int level, String tag, boolean val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, char num) {
-        
+    public void log(int level, String tag, char val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
 
-    public void log(int level, String tag, byte num) {
-        
+    public void log(int level, String tag, byte val) {
+        System.out.println("|"+level+"|"+tag+"|"+val+"|");
     }
     
 }
