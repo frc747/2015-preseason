@@ -35,18 +35,43 @@ public class Move implements IMove {
         input = Input.getInstance();
         logger = Logging.getInstance();
     }
+    public void setSpeed(boolean rightSpeedController, double speed) {
+        if(rightSpeedController) {
+            right.set(speed);
+        } else {
+            left.set(speed);
+        }
+    }
     public void setSpeed(boolean clockwise, boolean rightSpeedController, double speed) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+        if(clockwise) {
+            this.setSpeed(rightSpeedController,speed);
+        } else {
+            this.setSpeed(rightSpeedController,-speed);
+        }
+    }
+    
+    public double getRawSpeed(boolean rightSpeedController) {
+        if(rightSpeedController) {
+            return right.get();
+        } else {
+            return left.get();
+        }
     }
 
     public double getSpeed(boolean rightSpeedController) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
-        return 0;
+        if(rightSpeedController) {
+            return Math.abs(right.get());
+        } else {
+            return Math.abs(left.get());
+        }
     }
 
     public boolean getDirection(boolean rightSpeedController) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
-        return false;
+        if(rightSpeedController) {
+            return right.get()>0;
+        } else {
+            return left.get()>0;
+        }
     }
 
     public void control() {
