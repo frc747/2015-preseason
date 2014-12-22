@@ -38,22 +38,45 @@ public class Limits implements ILimits {
         logger = Logging.getInstance();
     }
     public boolean getRealSwitch(int number) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+        switch(number) {
+            case 1:
+                return limit1.get();
+            case 2:
+                return limit2.get();
+            case 3:
+                return limit3.get();
+            case 4:
+                return limit4.get();
+            case 5:
+                return limit5.get();
+            case 6:
+                return limit6.get();
+            case 7:
+                return limit7.get();
+            case 8:
+                return limit8.get();
+            case 9:
+                return limit9.get();
+            case 10:
+                return limit10.get();
+        }
         return false;
     }
 
     public boolean getInversed(int number) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
         return false;
     }
 
     public boolean getSwitch(int number) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
-        return false;
+        if(getInversed(number)) {
+            return !getRealSwitch(number);
+        } else {
+            return getRealSwitch(number);
+        }
     }
 
     public void setup() {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+        //no setup
     }
     
 }
