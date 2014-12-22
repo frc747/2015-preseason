@@ -10,7 +10,9 @@ package com.frc869.robot.preSeason2015.subsystems.interfaces;
  * @author Michael
  */
 public interface ISpike extends IControlable {
-    //1 forward, 2 backward, 3 still
+    public final static int OFF = 3;
+    public final static int FORWARD = 1;
+    public final static int BACKWARD = 2;
     public void setDirection(int direction, boolean rightSpike);
     public int getDirection(boolean rightSpike);
 }
