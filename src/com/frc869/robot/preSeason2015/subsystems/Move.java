@@ -5,6 +5,7 @@
  */
 package com.frc869.robot.preSeason2015.subsystems;
 
+import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.IMove;
 import edu.wpi.first.wpilibj.Talon;
 
@@ -22,18 +23,24 @@ public class Move implements IMove {
         }
         return instance;
     }
+    private boolean leftUp, leftDown, rightUp, rightDown;
+    private double stepLeft,stepRight;
     private final Talon left, right;
     private final Encoders encoders;
     private final Limits limits;
-    private final Input input;
     private final Logging logger;
     private Move() {
         left = new Talon(1);
         right = new Talon(2);
         encoders = Encoders.getInstance();
         limits = Limits.getInstance();
-        input = Input.getInstance();
         logger = Logging.getInstance();
+        stepLeft = 0;
+        stepRight = 0;
+        leftUp = false;
+        leftDown = false;
+        rightUp = false;
+        rightDown = false;
     }
     public void setSpeed(boolean rightSpeedController, double speed) {
         if(rightSpeedController) {
@@ -73,9 +80,50 @@ public class Move implements IMove {
             return left.get()>0;
         }
     }
-
-    public void control() {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+    public void control(IInput controller) {
+        if(stepLeft==0) {
+            this.setSpeed(false,controller.getLeftY());
+        } else {
+            if(stepLeft<1 && controller.getDpadY()>.1 && !leftUp) {
+                leftUp = true;
+                leftDown = false;
+                stepLeft += .1;
+                if(stepLeft>1) {
+                    stepLeft = 1;
+                }
+            } else if(stepLeft>-1 && controller.getDpadY()<-.1 && !leftDown) {
+                leftUp = false;
+                leftDown = true;
+                stepLeft -= .1;
+            } else {
+                leftUp = false;
+                leftDown = false;
+            }
+            if(controller.getDpadX()<.1 || controller.getDpadX()>-.1) {
+                stepLeft = 0;
+            }
+            this.setSpeed(false,stepLeft);
+        }
+        if(stepRight==0) {
+            this.setSpeed(true,controller.getRightY());
+        } else {
+            if(stepRight<1 && controller.getButtonX() && !rightUp) {
+                rightUp = true;
+                rightDown = false;
+                stepRight += .1;
+            } else if(stepRight>-1 && controller.getButtonA() && !rightDown) {
+                rightUp = false;
+                rightDown = true;
+                stepRight -= .1;
+            } else {
+                rightUp = false;
+                rightDown = false;
+            }
+            if(controller.getButtonY() || controller.getButtonB()) {
+                stepRight = 0;
+            }
+            this.setSpeed(true,stepRight);
+        }
     }
     
 }

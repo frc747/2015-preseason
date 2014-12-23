@@ -10,5 +10,5 @@ package com.frc869.robot.preSeason2015.subsystems.interfaces;
  * @author Michael
  */
 public interface IControlable {
-    public void control();
+    public void control(IInput controller);
 }

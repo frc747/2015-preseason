@@ -10,8 +10,10 @@ package com.frc869.robot.preSeason2015;
 import com.frc869.robot.preSeason2015.subsystems.Encoders;
 import com.frc869.robot.preSeason2015.subsystems.Limits;
 import com.frc869.robot.preSeason2015.subsystems.Logging;
+import com.frc869.robot.preSeason2015.subsystems.LogitechGamepad;
 import com.frc869.robot.preSeason2015.subsystems.Move;
 import com.frc869.robot.preSeason2015.subsystems.Spikes;
+import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
     private Limits limits;
     private Move move;
     private Spikes spikes;
+    private IInput controller;
     
     //start up the robot
     public void robotInit() {
@@ -37,6 +40,7 @@ public class Robot extends IterativeRobot {
         limits = Limits.getInstance();
         move = Move.getInstance();
         spikes = Spikes.getInstance();
+        controller = LogitechGamepad.getInstance();
         encoder.setup();
         limits.setup();
         logger.log(Logging.info, TAG, "Done starting robot");
@@ -45,8 +49,8 @@ public class Robot extends IterativeRobot {
     //treat this as teleoperated, it gives is amazing output on smartdashboard :)
     public void testPeriodic() {
         logger.log(Logging.info, TAG, "Test Loop Start");
-        move.control();
-        spikes.control();
+        move.control(controller);
+        spikes.control(controller);
         logger.log(Logging.info, TAG, "Test Loop End");
     }
     

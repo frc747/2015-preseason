@@ -29,4 +29,22 @@ public interface IInput {
     
     public double getJoystick(boolean rightStick, boolean yAxis);
     public boolean getButton(int buttonNum);
+    public boolean getButtonA();
+    public boolean getButtonB();
+    public boolean getButtonX();
+    public boolean getButtonY();
+    public boolean getButtonL1();
+    public boolean getButtonR1();
+    public boolean getButtonL2();
+    public boolean getButtonR2();
+    public boolean getButtonSelect();
+    public boolean getButtonStart();
+    public boolean getButtonL3();
+    public boolean getButtonR3();
+    public double getLeftX();
+    public double getLeftY();
+    public double getRightX();
+    public double getRightY();
+    public double getDpadX();
+    public double getDpadY();
 }

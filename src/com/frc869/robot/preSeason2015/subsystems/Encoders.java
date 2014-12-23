@@ -26,10 +26,8 @@ public class Encoders implements IEncoders {
     private final Encoder left, right;
     private final Logging logger;
     private Encoders() {
-        //digital inputs 13 & 14
-        left = new Encoder(13,14, true);
-        //digital inputs 9 & 10
         right = new Encoder(11,12, false);
+        left = new Encoder(13,14, true);
         logger = Logging.getInstance();
     }
     public double getDistance(boolean right) {
@@ -48,11 +46,21 @@ public class Encoders implements IEncoders {
     }
 
     public void reset(boolean right) {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+        if(right) {
+            this.right.reset();
+        } else {
+            this.left.reset();
+        }
+    }
+    
+    public void reset() {
+        this.reset(true);
+        this.reset(false);
     }
 
     public void setup() {
-        logger.log(Logging.wtf, TAG, "Not supported yet.");
+        this.left.start();
+        this.right.start();
     }
     
 }

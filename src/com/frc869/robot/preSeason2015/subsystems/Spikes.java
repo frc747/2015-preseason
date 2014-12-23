@@ -5,6 +5,7 @@
  */
 package com.frc869.robot.preSeason2015.subsystems;
 
+import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.ISpike;
 import edu.wpi.first.wpilibj.Relay;
 
@@ -25,14 +26,12 @@ public class Spikes implements ISpike {
     private final Relay left, right;
     private final Encoders encoders;
     private final Limits limits;
-    private final Input input;
     private final Logging logger;
     private Spikes() {
         left = new Relay(1);
         right = new Relay(2);
         encoders = Encoders.getInstance();
         limits = Limits.getInstance();
-        input = Input.getInstance();
         logger = Logging.getInstance();
     }
     public void setDirection(int direction, boolean rightSpike) {
@@ -78,8 +77,21 @@ public class Spikes implements ISpike {
         }
     }
 
-    public void control() {
-        throw new RuntimeException("Not supported yet.");
+    public void control(IInput controller) {
+        if(controller.getButtonL1()) {
+            this.setDirectionValue(Relay.Value.kForward,false);
+        } else if(controller.getButtonL2()) {
+            this.setDirectionValue(Relay.Value.kReverse,false);
+        } else {
+            this.setDirectionValue(Relay.Value.kOff,false);
+        }
+        if(controller.getButtonR1()) {
+            this.setDirectionValue(Relay.Value.kForward,true);
+        } else if(controller.getButtonR2()) {
+            this.setDirectionValue(Relay.Value.kReverse,true);
+        } else {
+            this.setDirectionValue(Relay.Value.kOff,true);
+        }
     }
     
 }
