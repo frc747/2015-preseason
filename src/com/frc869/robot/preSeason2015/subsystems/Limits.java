@@ -8,6 +8,7 @@ package com.frc869.robot.preSeason2015.subsystems;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.ILimits;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,6 +16,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Limits implements ILimits {
     private final static String TAG = "Limits";
+    private final static String limit1Open = "Limit switch 1 normally open";
+    private final static String limit2Open = "Limit switch 2 normally open";
+    private final static String limit3Open = "Limit switch 3 normally open";
+    private final static String limit4Open = "Limit switch 4 normally open";
+    private final static String limit5Open = "Limit switch 5 normally open";
+    private final static String limit6Open = "Limit switch 6 normally open";
+    private final static String limit7Open = "Limit switch 7 normally open";
+    private final static String limit8Open = "Limit switch 8 normally open";
+    private final static String limit9Open = "Limit switch 9 normally open";
+    private final static String limit10Open = "Limit switch 10 normally open";
     //Singleton
     private static Limits instance;
     public static Limits getInstance() {
@@ -37,7 +48,16 @@ public class Limits implements ILimits {
         limit9 = new DigitalInput(9);
         limit10 = new DigitalInput(10);
         logger = Logging.getInstance();
-        
+        SmartDashboard.putBoolean(limit1Open, true);
+        SmartDashboard.putBoolean(limit2Open, true);
+        SmartDashboard.putBoolean(limit3Open, true);
+        SmartDashboard.putBoolean(limit4Open, true);
+        SmartDashboard.putBoolean(limit5Open, true);
+        SmartDashboard.putBoolean(limit6Open, true);
+        SmartDashboard.putBoolean(limit7Open, true);
+        SmartDashboard.putBoolean(limit8Open, true);
+        SmartDashboard.putBoolean(limit9Open, true);
+        SmartDashboard.putBoolean(limit10Open, true);
     }
     public boolean getRealSwitch(int number) {
         switch(number) {
@@ -66,6 +86,28 @@ public class Limits implements ILimits {
     }
 
     public boolean getInversed(int number) {
+        switch(number) {
+            case 1:
+                return SmartDashboard.getBoolean(limit1Open, true);
+            case 2:
+                return SmartDashboard.getBoolean(limit2Open, true);
+            case 3:
+                return SmartDashboard.getBoolean(limit3Open, true);
+            case 4:
+                return SmartDashboard.getBoolean(limit4Open, true);
+            case 5:
+                return SmartDashboard.getBoolean(limit5Open, true);
+            case 6:
+                return SmartDashboard.getBoolean(limit6Open, true);
+            case 7:
+                return SmartDashboard.getBoolean(limit7Open, true);
+            case 8:
+                return SmartDashboard.getBoolean(limit8Open, true);
+            case 9:
+                return SmartDashboard.getBoolean(limit9Open, true);
+            case 10:
+                return SmartDashboard.getBoolean(limit10Open, true);
+        }
         return false;
     }
 
