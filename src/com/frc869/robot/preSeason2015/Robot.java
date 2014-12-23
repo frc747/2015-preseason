@@ -15,6 +15,7 @@ import com.frc869.robot.preSeason2015.subsystems.Move;
 import com.frc869.robot.preSeason2015.subsystems.Spikes;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,6 +52,8 @@ public class Robot extends IterativeRobot {
         logger.log(Logging.info, TAG, "Test Loop Start");
         move.control(controller);
         spikes.control(controller);
+        SmartDashboard.putNumber("Left encoder distance", encoder.getDistance(false));
+        SmartDashboard.putNumber("Right encoder distance", encoder.getDistance(true));
         logger.log(Logging.info, TAG, "Test Loop End");
     }
     

@@ -6,7 +6,6 @@
 package com.frc869.robot.preSeason2015.subsystems;
 
 import com.frc869.robot.preSeason2015.subsystems.interfaces.IEncoders;
-import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
