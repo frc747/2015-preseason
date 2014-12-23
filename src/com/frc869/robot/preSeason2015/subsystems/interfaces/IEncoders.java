@@ -11,7 +11,5 @@ package com.frc869.robot.preSeason2015.subsystems.interfaces;
  */
 public interface IEncoders extends ISensor {
     public double getDistance(boolean right);
-    public int turnedLeft(boolean right);
-    public int turnedRight(boolean right);
     public void reset(boolean right);
 }
