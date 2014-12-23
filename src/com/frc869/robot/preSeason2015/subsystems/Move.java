@@ -30,17 +30,15 @@ public class Move implements IMove {
         return instance;
     }
     private boolean leftUp, leftDown, rightUp, rightDown;
-    private boolean inverseLeft, inverseRight;
     private double stepLeft,stepRight;
-    private double testLeft,testRight;
     private final Talon left, right;
     private final Encoders encoders;
     private final Limits limits;
     private final Logging logger;
-    private SendableChooser startLeftClockwise, stopLeftClockwise;
-    private SendableChooser startLeftCounterClockwise, stopLeftCounterClockwise;
-    private SendableChooser startRightClockwise, stopRightClockwise;
-    private SendableChooser startRightCounterClockwise, stopRightCounterClockwise;
+    private final SendableChooser startLeftClockwise, stopLeftClockwise;
+    private final SendableChooser startLeftCounterClockwise, stopLeftCounterClockwise;
+    private final SendableChooser startRightClockwise, stopRightClockwise;
+    private final SendableChooser startRightCounterClockwise, stopRightCounterClockwise;
     private Move() {
         left = new Talon(1);
         right = new Talon(2);
@@ -49,14 +47,10 @@ public class Move implements IMove {
         logger = Logging.getInstance();
         stepLeft = 0;
         stepRight = 0;
-        testLeft = 0;
-        testRight = 0;
         leftUp = false;
         leftDown = false;
         rightUp = false;
         rightDown = false;
-        inverseLeft = false;
-        inverseRight = false;
         startLeftClockwise = limits.getLimitChooser();
         stopLeftClockwise = limits.getLimitChooser();
         startLeftCounterClockwise = limits.getLimitChooser();
@@ -162,9 +156,9 @@ public class Move implements IMove {
         }
         if(SmartDashboard.getBoolean(testTalonRight, false) || controller.getButtonStart()) {
             this.setSpeed(true,SmartDashboard.getNumber(testTalonRightSpeed, 0));
-        } else if(limits.getSwitch(startLeftClockwise)) {
+        } else if(limits.getSwitch(startRightClockwise)) {
             this.setSpeed(true,Math.abs(SmartDashboard.getNumber(testTalonRightSpeed, 0)));
-        } else if(limits.getSwitch(startLeftCounterClockwise)) {
+        } else if(limits.getSwitch(startRightCounterClockwise)) {
             this.setSpeed(true,-Math.abs(SmartDashboard.getNumber(testTalonRightSpeed, 0)));
         } else if(stepRight!=0) {
             if(stepRight<1 && controller.getButtonX() && !rightUp) {

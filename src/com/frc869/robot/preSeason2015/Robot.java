@@ -13,9 +13,11 @@ import com.frc869.robot.preSeason2015.subsystems.Logging;
 import com.frc869.robot.preSeason2015.subsystems.LogitechGamepad;
 import com.frc869.robot.preSeason2015.subsystems.Move;
 import com.frc869.robot.preSeason2015.subsystems.Spikes;
+import com.frc869.robot.preSeason2015.subsystems.Xbox360;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -32,7 +34,7 @@ public class Robot extends IterativeRobot {
     private Limits limits;
     private Move move;
     private Spikes spikes;
-    private IInput controller;
+    private SendableChooser controller;
     
     /**
      * Robot-wide initialization code should go here.
@@ -47,7 +49,10 @@ public class Robot extends IterativeRobot {
         limits = Limits.getInstance();
         move = Move.getInstance();
         spikes = Spikes.getInstance();
-        controller = LogitechGamepad.getInstance();
+        controller = new SendableChooser();
+        controller.addDefault("Logitech F310",LogitechGamepad.getInstance());
+        controller.addObject("Xbox 360", Xbox360.getInstance());
+        SmartDashboard.putData("Controller type", controller);
         encoder.setup();
         limits.setup();
         this.getWatchdog().setExpiration(5);
@@ -138,8 +143,8 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         logger.log(Logging.info, TAG, "Test Loop Start");
         this.getWatchdog().feed();
-        move.control(controller);
-        spikes.control(controller);
+        move.control((IInput) controller.getSelected());
+        spikes.control((IInput) controller.getSelected());
         SmartDashboard.putNumber("Left encoder distance", encoder.getDistance(false));
         SmartDashboard.putNumber("Right encoder distance", encoder.getDistance(true));
         Timer.delay(0.001);

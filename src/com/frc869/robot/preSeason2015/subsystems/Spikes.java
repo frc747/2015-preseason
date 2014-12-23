@@ -29,10 +29,10 @@ public class Spikes implements ISpike {
     private final Encoders encoders;
     private final Limits limits;
     private final Logging logger;
-    private SendableChooser startLeftClockwise, stopLeftClockwise;
-    private SendableChooser startLeftCounterClockwise, stopLeftCounterClockwise;
-    private SendableChooser startRightClockwise, stopRightClockwise;
-    private SendableChooser startRightCounterClockwise, stopRightCounterClockwise;
+    private final SendableChooser startLeftClockwise, stopLeftClockwise;
+    private final SendableChooser startLeftCounterClockwise, stopLeftCounterClockwise;
+    private final SendableChooser startRightClockwise, stopRightClockwise;
+    private final SendableChooser startRightCounterClockwise, stopRightCounterClockwise;
     private Spikes() {
         left = new Relay(1);
         right = new Relay(2);
