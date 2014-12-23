@@ -8,6 +8,8 @@ package com.frc869.robot.preSeason2015.subsystems;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.IInput;
 import com.frc869.robot.preSeason2015.subsystems.interfaces.ISpike;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -27,12 +29,32 @@ public class Spikes implements ISpike {
     private final Encoders encoders;
     private final Limits limits;
     private final Logging logger;
+    private SendableChooser startLeftClockwise, stopLeftClockwise;
+    private SendableChooser startLeftCounterClockwise, stopLeftCounterClockwise;
+    private SendableChooser startRightClockwise, stopRightClockwise;
+    private SendableChooser startRightCounterClockwise, stopRightCounterClockwise;
     private Spikes() {
         left = new Relay(1);
         right = new Relay(2);
         encoders = Encoders.getInstance();
         limits = Limits.getInstance();
         logger = Logging.getInstance();
+        startLeftClockwise = limits.getLimitChooser();
+        stopLeftClockwise = limits.getLimitChooser();
+        startLeftCounterClockwise = limits.getLimitChooser();
+        stopLeftCounterClockwise = limits.getLimitChooser();
+        startRightClockwise = limits.getLimitChooser();
+        stopRightClockwise = limits.getLimitChooser();
+        startRightCounterClockwise = limits.getLimitChooser();
+        stopRightCounterClockwise = limits.getLimitChooser();
+        SmartDashboard.putData("Start left spike clockwise",startLeftClockwise);
+        SmartDashboard.putData("Stop left spike clockwise",stopLeftClockwise);
+        SmartDashboard.putData("Start left spike counter clockwise",startLeftCounterClockwise);
+        SmartDashboard.putData("Stop left spike counter clockwise",stopLeftCounterClockwise);
+        SmartDashboard.putData("Start right spike clockwise",startRightClockwise);
+        SmartDashboard.putData("Stop right spike clockwise",stopRightClockwise);
+        SmartDashboard.putData("Start right spike counter clockwise",startRightCounterClockwise);
+        SmartDashboard.putData("Stop right spike counter clockwise",stopRightCounterClockwise);
     }
     public void setDirection(int direction, boolean rightSpike) {
         switch(direction) {
@@ -52,9 +74,23 @@ public class Spikes implements ISpike {
     }
     public void setDirectionValue(Relay.Value direction, boolean rightSpike) {
         if(rightSpike) {
-            right.set(direction);
+            if(
+                (Relay.Value.kForward.equals(direction) && !limits.getSwitch(stopRightClockwise)) ||
+                (Relay.Value.kReverse.equals(direction) && !limits.getSwitch(stopRightCounterClockwise))
+            ) {
+                right.set(direction);
+            } else {
+                right.set(Relay.Value.kOff);
+            }
         } else {
-            left.set(direction);
+            if(
+                (Relay.Value.kForward.equals(direction) && !limits.getSwitch(stopLeftClockwise)) ||
+                (Relay.Value.kReverse.equals(direction) && !limits.getSwitch(stopLeftCounterClockwise))
+            ) {
+                left.set(direction);
+            } else {
+                left.set(Relay.Value.kOff);
+            }
         }
     }
 
@@ -78,16 +114,16 @@ public class Spikes implements ISpike {
     }
 
     public void control(IInput controller) {
-        if(controller.getButtonL1()) {
+        if(controller.getButtonL1() || limits.getSwitch(startLeftClockwise)) {
             this.setDirectionValue(Relay.Value.kForward,false);
-        } else if(controller.getButtonL2()) {
+        } else if(controller.getButtonL2() || limits.getSwitch(startLeftCounterClockwise)) {
             this.setDirectionValue(Relay.Value.kReverse,false);
         } else {
             this.setDirectionValue(Relay.Value.kOff,false);
         }
-        if(controller.getButtonR1()) {
+        if(controller.getButtonR1() || limits.getSwitch(startRightClockwise)) {
             this.setDirectionValue(Relay.Value.kForward,true);
-        } else if(controller.getButtonR2()) {
+        } else if(controller.getButtonR2() || limits.getSwitch(startRightCounterClockwise)) {
             this.setDirectionValue(Relay.Value.kReverse,true);
         } else {
             this.setDirectionValue(Relay.Value.kOff,true);

@@ -7,6 +7,7 @@ package com.frc869.robot.preSeason2015.subsystems;
 
 import com.frc869.robot.preSeason2015.subsystems.interfaces.ILimits;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  *
@@ -36,6 +37,7 @@ public class Limits implements ILimits {
         limit9 = new DigitalInput(9);
         limit10 = new DigitalInput(10);
         logger = Logging.getInstance();
+        
     }
     public boolean getRealSwitch(int number) {
         switch(number) {
@@ -79,4 +81,28 @@ public class Limits implements ILimits {
         //no setup
     }
     
+    public SendableChooser getLimitChooser() {
+        SendableChooser chooser = new SendableChooser();
+        chooser.addDefault("None",new Integer(0));
+        chooser.addObject("Limit Switch 1", new Integer(1));
+        chooser.addObject("Limit Switch 2", new Integer(2));
+        chooser.addObject("Limit Switch 3", new Integer(3));
+        chooser.addObject("Limit Switch 4", new Integer(4));
+        chooser.addObject("Limit Switch 5", new Integer(5));
+        chooser.addObject("Limit Switch 6", new Integer(6));
+        chooser.addObject("Limit Switch 7", new Integer(7));
+        chooser.addObject("Limit Switch 8", new Integer(8));
+        chooser.addObject("Limit Switch 9", new Integer(9));
+        chooser.addObject("Limit Switch 10", new Integer(10));
+        return chooser;
+    }
+    
+    public boolean getSwitch(SendableChooser chooser) {
+        Integer valueObject = (Integer) chooser.getSelected();
+        int value = 0;
+        if(null!=valueObject) {
+            value = valueObject.intValue();
+        }
+        return this.getSwitch(value);
+    }
 }
