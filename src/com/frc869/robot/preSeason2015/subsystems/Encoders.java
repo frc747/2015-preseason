@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Encoders implements IEncoders {
     private final static String TAG = "Encoders";
+    private final static String reverseLeft = "Reverse left encoder";
+    private final static String reverseRight = "Reverse right encoder";
     private final static String driveGear = "Drive Gear";
     private final static String wheelGear = "Wheel Gear";
     private final static String pulsePerRotation = "Pulses per rotation";
@@ -33,8 +35,10 @@ public class Encoders implements IEncoders {
     private final Logging logger;
     private Encoders() {
         right = new Encoder(11,12, false);
-        left = new Encoder(13,14, true);
+        left = new Encoder(13,14, false);
         logger = Logging.getInstance();
+        SmartDashboard.putBoolean(reverseLeft, false);
+        SmartDashboard.putBoolean(reverseRight, false);
         SmartDashboard.putNumber(driveGear, 72);
         SmartDashboard.putNumber(wheelGear, 11);
         SmartDashboard.putNumber(pulsePerRotation, 250);
@@ -43,9 +47,17 @@ public class Encoders implements IEncoders {
     }
     public double getDistance(boolean right) {
         if(right) {
-            return this.right.getDistance();
+            if(SmartDashboard.getBoolean(reverseRight, false)) {
+                return -this.right.getDistance();
+            } else {
+                return this.right.getDistance();
+            }
         } else {
-            return this.left.getDistance();
+            if(SmartDashboard.getBoolean(reverseLeft, false)) {
+                return -this.left.getDistance();
+            } else {
+                return this.left.getDistance();
+            }
         }
     }
 
