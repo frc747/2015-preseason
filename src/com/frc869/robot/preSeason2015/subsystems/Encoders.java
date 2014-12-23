@@ -46,6 +46,12 @@ public class Encoders implements IEncoders {
         SmartDashboard.putNumber(wheelBase, 34.1);
     }
     public double getDistance(boolean right) {
+        double pulsePerRotationScaled = ((SmartDashboard.getNumber(driveGear, 1)/SmartDashboard.getNumber(wheelGear, 1)) * SmartDashboard.getNumber(pulsePerRotation, 0));
+        double clicksPerInch = pulsePerRotationScaled / (Math.PI * SmartDashboard.getNumber(wheelDiameter, 1));
+        double distancePerClick = (Math.PI * SmartDashboard.getNumber(wheelDiameter, 1)) / pulsePerRotationScaled;
+        double distanceToSpin = (Math.PI * SmartDashboard.getNumber(wheelBase, 0) * clicksPerInch);
+        this.right.setDistancePerPulse(distancePerClick);
+        this.left.setDistancePerPulse(distancePerClick);
         if(right) {
             if(SmartDashboard.getBoolean(reverseRight, false)) {
                 return -this.right.getDistance();
@@ -75,15 +81,6 @@ public class Encoders implements IEncoders {
     }
 
     public void setup() {
-        this.left.stop();
-        this.right.stop();
-        double pulsePerRotationScaled = ((SmartDashboard.getNumber(driveGear, 1)/SmartDashboard.getNumber(wheelGear, 1)) * SmartDashboard.getNumber(pulsePerRotation, 0));
-        double clicksPerInch = pulsePerRotationScaled / (Math.PI * SmartDashboard.getNumber(wheelDiameter, 1));
-        double distancePerClick = (Math.PI * SmartDashboard.getNumber(wheelDiameter, 1)) / pulsePerRotationScaled;
-        double distanceToSpin = (Math.PI * SmartDashboard.getNumber(wheelBase, 0) * clicksPerInch);
-        this.left.setDistancePerPulse(distancePerClick);
-        this.left.setMaxPeriod(10);
-        this.left.setMinRate(10);
         this.left.start();
         this.right.start();
     }
