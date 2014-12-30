@@ -152,7 +152,7 @@ public class Move implements IMove {
             }
             if(stepLeft!=0) {
                 this.setSpeed(false,stepLeft);
-            } else {
+            } else if(Math.abs(controller.getLeftY())>.1) {
                 this.setSpeed(false,controller.getLeftY());
             }
         }
@@ -180,7 +180,7 @@ public class Move implements IMove {
             }
             if(stepRight!=0) {
                 this.setSpeed(true,stepRight);
-            } else {
+            } else if(Math.abs(controller.getRightY())>.1) {
                 this.setSpeed(true,controller.getRightY());
             }
         } 
