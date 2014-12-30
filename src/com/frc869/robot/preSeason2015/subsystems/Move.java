@@ -125,34 +125,6 @@ public class Move implements IMove {
         }
     }
     public void control(IInput controller) {
-        if(stepRight<1 && controller.getButtonY() && !rightUp) {
-            rightUp = true;
-            rightDown = false;
-            stepRight += .1;
-        } else if(stepRight>-1 && controller.getButtonA() && !rightDown) {
-            rightUp = false;
-            rightDown = true;
-            stepRight -= .1;
-        } else {
-            rightUp = false;
-            rightDown = false;
-        }
-        if(controller.getButtonX() || controller.getButtonB()) {
-            stepRight = 0;
-        }
-        
-        if(SmartDashboard.getBoolean(testTalonLeft, false) || controller.getButtonSelect()) {
-            this.setSpeed(false,SmartDashboard.getNumber(testTalonLeftSpeed, 0));
-        } else if(limits.getSwitch(startLeftClockwise)) {
-            this.setSpeed(false,Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
-        } else if(limits.getSwitch(startLeftCounterClockwise)) {
-            this.setSpeed(false,-Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
-        } else if(stepLeft!=0) {
-            this.setSpeed(false,stepLeft);
-        } else if(Math.abs(controller.getLeftY())>.1) {
-            this.setSpeed(false,controller.getLeftY());
-        }
-        
         if(stepLeft<1 && controller.getDpadY()>.1 && !leftUp) {
             leftUp = true;
             leftDown = false;
@@ -169,6 +141,34 @@ public class Move implements IMove {
             stepLeft = 0;
         }
         
+        if(SmartDashboard.getBoolean(testTalonLeft, false) || controller.getButtonSelect()) {
+            this.setSpeed(false,SmartDashboard.getNumber(testTalonLeftSpeed, 0));
+        } else if(limits.getSwitch(startLeftClockwise)) {
+            this.setSpeed(false,Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
+        } else if(limits.getSwitch(startLeftCounterClockwise)) {
+            this.setSpeed(false,-Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
+        } else if(stepLeft!=0) {
+            this.setSpeed(false,stepLeft);
+        } else if(Math.abs(controller.getLeftY())>.1) {
+            this.setSpeed(false,controller.getLeftY());
+        }
+        
+        if(stepRight<1 && controller.getButtonY() && !rightUp) {
+            rightUp = true;
+            rightDown = false;
+            stepRight += .1;
+        } else if(stepRight>-1 && controller.getButtonA() && !rightDown) {
+            rightUp = false;
+            rightDown = true;
+            stepRight -= .1;
+        } else {
+            rightUp = false;
+            rightDown = false;
+        }
+        if(controller.getButtonX() || controller.getButtonB()) {
+            stepRight = 0;
+        }
+        
         if(SmartDashboard.getBoolean(testTalonRight, false) || controller.getButtonStart()) {
             this.setSpeed(true,SmartDashboard.getNumber(testTalonRightSpeed, 0));
         } else if(limits.getSwitch(startRightClockwise)) {
@@ -181,5 +181,4 @@ public class Move implements IMove {
             this.setSpeed(true,controller.getRightY());
         }
     }
-    
 }
