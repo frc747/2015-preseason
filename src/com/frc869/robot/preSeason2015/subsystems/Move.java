@@ -133,7 +133,7 @@ public class Move implements IMove {
             leftUp = false;
             leftDown = true;
             stepLeft -= .1;
-        } else {
+        } else if (Math.abs(controller.getDpadY())<.1) {
             leftUp = false;
             leftDown = false;
         }
@@ -161,7 +161,7 @@ public class Move implements IMove {
             rightUp = false;
             rightDown = true;
             stepRight -= .1;
-        } else {
+        } else if (!controller.getButtonY() && !controller.getButtonA()) {
             rightUp = false;
             rightDown = false;
         }
