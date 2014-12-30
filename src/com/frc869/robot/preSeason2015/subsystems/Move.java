@@ -163,7 +163,7 @@ public class Move implements IMove {
         } else if(limits.getSwitch(startRightCounterClockwise)) {
             this.setSpeed(true,-Math.abs(SmartDashboard.getNumber(testTalonRightSpeed, 0)));
         } else {
-            if(stepRight<1 && controller.getButtonX() && !rightUp) {
+            if(stepRight<1 && controller.getButtonY() && !rightUp) {
                 rightUp = true;
                 rightDown = false;
                 stepRight += .1;
@@ -175,7 +175,7 @@ public class Move implements IMove {
                 rightUp = false;
                 rightDown = false;
             }
-            if(controller.getButtonY() || controller.getButtonB()) {
+            if(controller.getButtonX() || controller.getButtonB()) {
                 stepRight = 0;
             }
             if(stepRight!=0) {
