@@ -125,65 +125,61 @@ public class Move implements IMove {
         }
     }
     public void control(IInput controller) {
+        if(stepRight<1 && controller.getButtonY() && !rightUp) {
+            rightUp = true;
+            rightDown = false;
+            stepRight += .1;
+        } else if(stepRight>-1 && controller.getButtonA() && !rightDown) {
+            rightUp = false;
+            rightDown = true;
+            stepRight -= .1;
+        } else {
+            rightUp = false;
+            rightDown = false;
+        }
+        if(controller.getButtonX() || controller.getButtonB()) {
+            stepRight = 0;
+        }
+        
         if(SmartDashboard.getBoolean(testTalonLeft, false) || controller.getButtonSelect()) {
             this.setSpeed(false,SmartDashboard.getNumber(testTalonLeftSpeed, 0));
         } else if(limits.getSwitch(startLeftClockwise)) {
             this.setSpeed(false,Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
         } else if(limits.getSwitch(startLeftCounterClockwise)) {
             this.setSpeed(false,-Math.abs(SmartDashboard.getNumber(testTalonLeftSpeed, 0)));
-        } else {
-            if(stepLeft<1 && controller.getDpadY()>.1 && !leftUp) {
-                leftUp = true;
-                leftDown = false;
-                stepLeft += .1;
-                if(stepLeft>1) {
-                    stepLeft = 1;
-                }
-            } else if(stepLeft>-1 && controller.getDpadY()<-.1 && !leftDown) {
-                leftUp = false;
-                leftDown = true;
-                stepLeft -= .1;
-            } else {
-                leftUp = false;
-                leftDown = false;
-            }
-            if(controller.getDpadX()<.1 || controller.getDpadX()>-.1) {
-                stepLeft = 0;
-            }
-            if(stepLeft!=0) {
-                this.setSpeed(false,stepLeft);
-            } else if(Math.abs(controller.getLeftY())>.1) {
-                this.setSpeed(false,controller.getLeftY());
-            }
+        } else if(stepLeft!=0) {
+            this.setSpeed(false,stepLeft);
+        } else if(Math.abs(controller.getLeftY())>.1) {
+            this.setSpeed(false,controller.getLeftY());
         }
+        
+        if(stepLeft<1 && controller.getDpadY()>.1 && !leftUp) {
+            leftUp = true;
+            leftDown = false;
+            stepLeft += .1;
+        } else if(stepLeft>-1 && controller.getDpadY()<-.1 && !leftDown) {
+            leftUp = false;
+            leftDown = true;
+            stepLeft -= .1;
+        } else {
+            leftUp = false;
+            leftDown = false;
+        }
+        if(Math.abs(controller.getDpadX())>.1) {
+            stepLeft = 0;
+        }
+        
         if(SmartDashboard.getBoolean(testTalonRight, false) || controller.getButtonStart()) {
             this.setSpeed(true,SmartDashboard.getNumber(testTalonRightSpeed, 0));
         } else if(limits.getSwitch(startRightClockwise)) {
             this.setSpeed(true,Math.abs(SmartDashboard.getNumber(testTalonRightSpeed, 0)));
         } else if(limits.getSwitch(startRightCounterClockwise)) {
             this.setSpeed(true,-Math.abs(SmartDashboard.getNumber(testTalonRightSpeed, 0)));
-        } else {
-            if(stepRight<1 && controller.getButtonY() && !rightUp) {
-                rightUp = true;
-                rightDown = false;
-                stepRight += .1;
-            } else if(stepRight>-1 && controller.getButtonA() && !rightDown) {
-                rightUp = false;
-                rightDown = true;
-                stepRight -= .1;
-            } else {
-                rightUp = false;
-                rightDown = false;
-            }
-            if(controller.getButtonX() || controller.getButtonB()) {
-                stepRight = 0;
-            }
-            if(stepRight!=0) {
-                this.setSpeed(true,stepRight);
-            } else if(Math.abs(controller.getRightY())>.1) {
-                this.setSpeed(true,controller.getRightY());
-            }
-        } 
+        } else if(stepRight!=0) {
+            this.setSpeed(true,stepRight);
+        } else if(Math.abs(controller.getRightY())>.1) {
+            this.setSpeed(true,controller.getRightY());
+        }
     }
     
 }
